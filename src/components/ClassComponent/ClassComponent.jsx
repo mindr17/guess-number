@@ -9,18 +9,21 @@ export class ClassComponent extends React.Component {
       number: 5,
       userNumber: '',
       randomNumber:
-        Math.floor(Math.random() * this.props.max - this.props.min) +
+        Math.floor(Math.random() *
+        this.props.max -
+        this.props.min) +
         this.props.min,
-        count: 0,
+      count: 0,
     };
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log('e.target: ', e.target);
 
     this.setState({
-      count: this.state.count
-    })
+      count: this.state.count,
+    });
 
     this.setState(state => {
       if (!state.userNumber) {
@@ -66,8 +69,15 @@ export class ClassComponent extends React.Component {
           <label className={style.label} htmlFor='user_number'>
             Угадай число
           </label>
-          <input className={style.input} type='number' id='user_number'
-            onChange={this.handleChange} value={this.state.user} />
+
+          <input
+            className={style.input}
+            type='number'
+            id='user_number'
+            onChange={this.handleChange}
+            value={this.state.userNumber}
+          />
+
           <button className={style.btn}>Угадать</button>
         </form>
       </div>
@@ -75,7 +85,7 @@ export class ClassComponent extends React.Component {
   }
 }
 
-ClassComponent.PropTypes = {
+ClassComponent.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
 };
